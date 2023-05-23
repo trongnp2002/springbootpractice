@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/todo.css}">
+</head>
+
+<body>
+    <div class="list-todo">
+        <div class="list-todo__title">
+            To-do list
+        </div>
+        <!-- @ de chi duong dan -->
+        <div class="list-todo__header">
+            <form th:action="@{/add-todo}" method="post">
+                <input type="text" name="title">
+                <input type="submit" value="submit">
+            </form>
+        </div>
+
+        <div class="list-todo__tasks" th:each="todo: ${listTodo}">
+            <span th:class="${todo.completed?'done':''}" th:text="${todo.title}"></span>
+            <span><a th:text="${todo.completed?'Inprocess':'Done'}"
+                    th:href="@{/complete-todo(id=${todo.id})}">Done</a></span>
+            <span><a th:href="@{/delete-todo(id=${todo.id})}">Delete</a></span>
+        </div>
+    </div>
+</body>
+
+</html>
